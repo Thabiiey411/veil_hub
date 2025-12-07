@@ -4,7 +4,10 @@
 
 [![Supra L1](https://img.shields.io/badge/Supra-L1-blue)](https://supra.com)
 [![Move](https://img.shields.io/badge/Language-Move-orange)](https://move-language.github.io/move/)
-[![Modules](https://img.shields.io/badge/Modules-18-green)](./move/sources)
+[![Modules](https://img.shields.io/badge/Modules-18-green)](./move/sourcesgit add README.md
+git commit -m "Update README"
+git push origin main
+)
 [![Status](https://img.shields.io/badge/Status-Ready%20to%20Deploy-success)](./DEPLOYMENT-COMPLETE.md)
 
 ## 🎯 Overview
