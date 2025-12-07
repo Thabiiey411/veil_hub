@@ -102,6 +102,7 @@ supra move publish \
 ## Documentation
 
 - [UNIFIED-TOKENOMICS-V17.md](UNIFIED-TOKENOMICS-V17.md) - Complete tokenomics
+- [PHASE-2-ROADMAP.md](PHASE-2-ROADMAP.md) - Phase 2 features (Q3 2026)
 - [VEIL-V17-PHANTOM-INDICES.md](VEIL-V17-PHANTOM-INDICES.md) - Indices mechanics
 - [VEIL-V17-SUSTAINABLE-ECOSYSTEM.md](VEIL-V17-SUSTAINABLE-ECOSYSTEM.md) - Sustainability model
 - [VEIL-V17-ALL-WEATHER-PROFITS.md](VEIL-V17-ALL-WEATHER-PROFITS.md) - Profit strategy
@@ -126,6 +127,24 @@ supra move publish \
 - **Base Case**: 49% APR @ $3B TVL
 - **Bear Market**: 33% APR minimum
 - **Bull Market**: 82% APR @ $5B TVL
+
+## 🗺️ Roadmap
+
+### Phase 1 (Q1 2026) - Core Launch ✅
+- **18 Modules**: Hub (5) + Finance (6) + Indices (3) + Integrations (3) + Governance (1)
+- **Revenue**: $280.5M annually @ $3B TVL
+- **APR**: 49% USDC dividends
+- **Status**: Ready for deployment
+
+### Phase 2 (Q3 2026) - Enhanced Features 🚀
+- **+3 Modules**: LP Vacuum + Enhanced veVEIL + Protocol-Owned Liquidity
+- **Revenue**: $329M annually (+17% boost)
+- **APR**: 55% USDC dividends (+6% boost)
+- **Features**: Permanent liquidity, boosted yields, protocol ownership
+
+📖 **[Phase 2 Details](PHASE-2-ROADMAP.md)**
+
+**Why Phase 2?** Deploy core first, validate with users, iterate based on feedback. Faster launch, lower audit costs, better market timing.
 
 ## Network Details
 
@@ -180,6 +199,7 @@ supra move publish \
 - [DEPLOY-NOW.md](DEPLOY-NOW.md) - Quick start
 
 ### Technical Docs
+- [PHASE-2-ROADMAP.md](PHASE-2-ROADMAP.md) - Phase 2 features (Q3 2026)
 - [VEIL-V17-PHANTOM-INDICES.md](VEIL-V17-PHANTOM-INDICES.md) - Indices mechanics (92 lines)
 - [VEIL-V17-SUSTAINABLE-ECOSYSTEM.md](VEIL-V17-SUSTAINABLE-ECOSYSTEM.md) - Sustainability (320 lines)
 - [VEIL-V17-ALL-WEATHER-PROFITS.md](VEIL-V17-ALL-WEATHER-PROFITS.md) - Profit strategy (332 lines)
