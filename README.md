@@ -288,3 +288,130 @@ MIT License - See LICENSE file
 [Deploy Now](DEPLOY-NOW.md) | [Documentation](UNIFIED-TOKENOMICS-V17.md) | [Support](mailto:developers@supra.com)
 
 </div>
+
+---
+
+## 🔧 Setup & Development (Updated Dec 2025)
+
+### Build Status
+✅ **0 npm vulnerabilities** - Fixed 8 (3 high, 1 critical) with `npm audit fix --force`
+✅ **Next.js 14.2.33** - Latest stable build
+✅ **TypeScript** - Configured for supra-l1-sdk compatibility
+✅ **Supra CLI** - Docker container ready for Move compilation
+
+### Quick Commands
+
+**Start Frontend:**
+```bash
+cd veil-hub-v2
+npm run dev  # http://localhost:3000
+```
+
+**Setup Smart Contracts:**
+```bash
+./scripts/start-supra.sh                    # Start Supra CLI container
+./scripts/supra-profile-new.sh myAccount    # Create profile with keys
+./scripts/supra-profile-list.sh             # List profiles
+```
+
+**Build Move Contracts:**
+```bash
+docker exec supra_cli /supra/supra move tool compile --package-dir /supra/move_workspace/VeilHub
+```
+
+## 📁 Project Organization
+
+**Key Frontend Files:**
+- `veil-hub-v2/app/` - Page components (dashboard, farm, pools, bridge, aggregator, analytics)
+- `veil-hub-v2/components/` - Reusable UI components
+- `veil-hub-v2/hooks/supra/` - Supra integration hooks (wallet, contracts, analytics)
+- `veil-hub-v2/lib/supra-contracts.ts` - Smart contract interface and helpers
+- `veil-hub-v2/config/` - Network and contract configuration
+
+**Smart Contracts:**
+- `supra/move_workspace/VeilHub/` - Move package
+- `supra/move_workspace/VeilHub/sources/` - Contract modules
+
+## 🤝 Smart Contract Integration
+
+The frontend is connected to Move contracts via:
+
+1. **Contract Interface** (`lib/supra-contracts.ts`):
+   - Contract addresses
+   - Function builders for Move calls
+   - Transaction submission helpers
+
+2. **React Hooks** (`hooks/supra/useSmartContracts.ts`):
+   - `useMoveContract()` - Execute any Move function
+   - `useVeilToken()` - Token operations (mint, transfer, balance)
+
+3. **Example Usage:**
+```typescript
+import { useVeilToken } from '@/hooks/supra/useSmartContracts';
+
+export function MyComponent() {
+  const { mint, transfer, getBalance, loading, error } = useVeilToken(profileName);
+  
+  const handleMint = async () => {
+    await mint(1000);  // Mint 1000 tokens
+  };
+  
+  return <button onClick={handleMint}>Mint</button>;
+}
+```
+
+## 🚀 Deployment
+
+### To Testnet:
+```bash
+# Create profile
+./scripts/supra-profile-new.sh deployAccount
+
+# Compile contracts
+docker exec supra_cli /supra/supra move tool compile --package-dir /supra/move_workspace/VeilHub
+
+# Publish (requires confirmation)
+docker exec supra_cli /supra/supra move tool publish \
+  --package-dir /supra/move_workspace/VeilHub \
+  --profile deployAccount \
+  --network testnet
+```
+
+### View on Explorer:
+- [Supra Testnet Explorer](https://testnet.suprascan.io/)
+- [Supra Mainnet Explorer](https://suprascan.io/)
+
+## 📚 Documentation Structure
+
+- `SUPRA-CLI-SETUP.md` - CLI container and profile management
+- `veil-hub-v2/FRONTEND-STRUCTURE.md` - Frontend architecture
+- `veil-hub-v2/docs/SECURITY.md` - Security practices
+- `veil-hub-v2/docs/UNIFIED-TOKENOMICS-V17.md` - Token economics
+
+## ⚠️ Known Issues & TODOs
+
+1. **Move Contracts**: Dependency issues with Aptos framework - using minimal stdlib
+   - **Fix**: Wait for official Supra framework Move 2 support OR use custom stdlib only
+   
+2. **Web3 Integration**: `wagmi.ts` needs wagmi v2 compatibility fixes
+   - **Status**: Configured but not fully tested with Supra testnet
+   
+3. **Contract Calls**: `lib/supra-contracts.ts` and hooks are placeholders
+   - **Next**: Integrate supra-l1-sdk for actual blockchain calls
+
+## 🤖 AI Features
+
+- **Dashboard**: Portfolio recommendations (not live)
+- **Yield Aggregator**: AI strategy optimization (ready for integration)
+- **Governance**: AI-assisted proposal analysis (ready for integration)
+
+## 🔐 Security
+
+- All npm vulnerabilities fixed (0 remaining)
+- TypeScript strict mode enabled (sdk-compatible)
+- Move contracts follow Supra conventions
+- No hardcoded private keys (use `~/.supra/` for dev keys)
+
+---
+
+**Last Updated:** December 8, 2025
