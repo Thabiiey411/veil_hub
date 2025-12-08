@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  supra-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile.supra
+    container_name: veil-supra-cli
+    volumes:
+      - ./veil-hub-v2/move:/app/move
+      - supra-cache:/root/.supra
+      - ~/.supra:/home/developer/.supra:ro
+    environment:
+      - SUPRA_NETWORK=testnet  # or mainnet
+      - SUPRA_CHAIN_ID=6      # testnet chain ID
+    working_dir: /app/move
+    stdin_open: true
+    tty: true
+    networks:
+      - supra-network
+
+  # Optional: Add a Supra node for local testing
+  supra-node:
+    image: supraoracles/supra-node:latest
+    container_name: veil-supra-node
+    ports:
+      - "8080:8080"  # RPC endpoint
+      - "9090:9090"  # Metrics
+    environment:
+      - NETWORK=testnet
+    networks:
+      - supra-network
+    restart: unless-stopped
+    # Comment out if you want to use testnet instead of local node
+
+volumes:
+  supra-cache:
+
+networks:
+  supra-network:
+    driver: bridge
