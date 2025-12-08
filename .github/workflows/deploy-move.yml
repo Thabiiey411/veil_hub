@@ -1,0 +1,45 @@
+name: Deploy Move Contracts (Testnet)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy-move:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./
+
+      - name: Show environment note
+        run: |
+          echo "This workflow expects the following secrets: SUPRA_PRIVATE_KEY, NEXT_PUBLIC_SUPRA_TESTNET_RPC"
+
+      - name: Prepare .env
+        run: |
+          echo "NEXT_PUBLIC_SUPRA_TESTNET_RPC=${{ secrets.NEXT_PUBLIC_SUPRA_TESTNET_RPC }}" > .env
+          echo "SUPRA_PRIVATE_KEY=${{ secrets.SUPRA_PRIVATE_KEY }}" >> .env
+          # Optionally write SUPRA_CLI_CMD if provided (keeps the deploy command in the environment)
+          if [ -n "${{ secrets.SUPRA_CLI_CMD }}" ]; then
+            echo "SUPRA_CLI_CMD=${{ secrets.SUPRA_CLI_CMD }}" >> .env
+          fi
+
+      - name: Run Move deploy script
+        env:
+          NEXT_PUBLIC_SUPRA_TESTNET_RPC: ${{ secrets.NEXT_PUBLIC_SUPRA_TESTNET_RPC }}
+          NEXT_PUBLIC_SUPRA_TESTNET_FAUCET: ${{ secrets.NEXT_PUBLIC_SUPRA_TESTNET_FAUCET }}
+          SUPRA_PRIVATE_KEY: ${{ secrets.SUPRA_PRIVATE_KEY }}
+          SUPRA_DEPLOY_ACCOUNT: ${{ secrets.SUPRA_DEPLOY_ACCOUNT }}
+          SUPRA_CLI_CMD: ${{ secrets.SUPRA_CLI_CMD }}
+        run: |
+          chmod +x ./scripts/deploy-move.sh
+          ./scripts/deploy-move.sh

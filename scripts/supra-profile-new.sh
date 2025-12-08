@@ -1,4 +1,26 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+# supra-profile-new.sh
+# Create a new Supra profile inside the Supra CLI container.
+# Usage:
+#   ./scripts/supra-profile-new.sh <profile-name> [--network testnet|mainnet|localnet|custom]
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: $0 <profile-name> [--network testnet|mainnet|localnet|custom]"
+  exit 2
+fi
+
+PROFILE_NAME="$1"
+shift || true
+
+CONTAINER="supra_cli"
+
+echo "Creating profile '$PROFILE_NAME' inside Supra CLI container ($CONTAINER)..."
+docker exec -it "$CONTAINER" supra profile new "$PROFILE_NAME" "$@"
+
+echo "Done. Use ./scripts/supra-profile-list.sh to view profiles." 
+#!/usr/bin/env bash
 # Create a new Supra profile (or import a private key) inside the supra container
 set -euo pipefail
 CONTAINER_NAME="veil-supra-cli"

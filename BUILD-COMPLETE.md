@@ -1,4 +1,4 @@
-# 🎉 Veil Hub - Professional Build Complete
+continue also deploy those smart contracts for me before  commiting them to my original guthub account# 🎉 Veil Hub - Professional Build Complete
 
 **Status**: ✅ **PRODUCTION READY**  
 **Date**: December 8, 2025  
