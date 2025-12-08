@@ -1,0 +1,14 @@
+[package]
+name = "VeilEcosystem"
+version = "17.0.0"
+authors = ["Veil Team"]
+
+[addresses]
+veil_hub = "_"
+veil_finance = "_"
+phantom_indices = "_"
+phase2 = "_"
+
+[dependencies]
+SupraFramework = { git = "https://github.com/Entropy-Foundation/supra-framework.git", subdir = "framework/supra-framework", rev = "main" }
+MoveStdlib = { git = "https://github.com/Entropy-Foundation/supra-framework.git", subdir = "framework/move-stdlib", rev = "main" }
