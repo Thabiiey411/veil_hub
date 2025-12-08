@@ -1,27 +1,51 @@
+/// Veil Token Module - Core token of the Veil ecosystem
+/// Supply: 1B VEIL (8 decimals = 100B units)
+/// Reserve Floor: 100M (10% protection)
 module veil_hub::veil_token {
     use std::signer;
-    use std::string;
-    use supra_framework::coin;
-    use veil_hub::access_control;
 
-    const E_ZERO_AMOUNT: u64 = 1;
-    const E_EXCEEDS_SUPPLY: u64 = 2;
-    const TOTAL_SUPPLY: u64 = 1000000000_00000000;
-    const RESERVE_FLOOR: u64 = 100000000_00000000;
+    /// Veil Token type
+    struct VeilToken {}
 
-    struct VeilToken has key {}
-
-    struct VeilCap has key {
-        mint_cap: coin::MintCapability<VeilToken>,
-        burn_cap: coin::BurnCapability<VeilToken>,
-        freeze_cap: coin::FreezeCapability<VeilToken>,
+    /// Token metadata and supply tracking
+    struct TokenMetadata has key {
+        total_supply: u64,
         total_burned: u64,
+        reserve_floor: u64,
+        decimals: u8,
     }
 
-    public entry fun initialize(account: &signer) acquires access_control::AdminRole {
-        access_control::assert_admin(account);
-        let (burn_cap, freeze_cap, mint_cap) = coin::initialize<VeilToken>(
-            account,
+    /// User balance store
+    struct Balance has key {
+        amount: u64,
+    }
+
+    // ===== Constants =====
+    const TOTAL_SUPPLY: u64 = 1000000000_00000000; // 1B with 8 decimals
+    const RESERVE_FLOOR: u64 = 100000000_00000000; // 100M
+    const DECIMALS: u8 = 8;
+
+    // ===== Errors =====
+    const E_ZERO_AMOUNT: u64 = 1;
+    const E_INSUFFICIENT_BALANCE: u64 = 2;
+    const E_EXCEEDS_SUPPLY: u64 = 3;
+    const E_BELOW_RESERVE: u64 = 4;
+    const E_ALREADY_INITIALIZED: u64 = 5;
+
+    /// Initialize the token module (call once from genesis)
+    public entry fun initialize(account: &signer) {
+        let addr = signer::address_of(account);
+        assert!(!exists<TokenMetadata>(addr), E_ALREADY_INITIALIZED);
+
+        move_to(account, TokenMetadata {
+            total_supply: TOTAL_SUPPLY,
+            total_burned: 0,
+            reserve_floor: RESERVE_FLOOR,
+            decimals: DECIMALS,
+        });
+
+        // Initialize admin account with full supply
+        move_to(account, Balance { amount: TOTAL_SUPPLY });
             string::utf8(b"Veil Token"),
             string::utf8(b"VEIL"),
             8,

@@ -1,0 +1,14 @@
+[package]
+name = "VeilTestnet"
+version = "1.0.0"
+authors = ["Veil Team"]
+
+[addresses]
+veil_token = "0x935ac2c9ac71bf55a9d67a31a0a09b069b7fc7f396d7521a59b850dec8f92a7b"
+veil_hub = "0x935ac2c9ac71bf55a9d67a31a0a09b069b7fc7f396d7521a59b850dec8f92a7c"
+veil_finance = "0x935ac2c9ac71bf55a9d67a31a0a09b069b7fc7f396d7521a59b850dec8f92a7d"
+
+[dependencies]
+Std = { git = "https://github.com/move-language/move.git", subdir = "language/move-stdlib" }
+
+[dev-dependencies]
