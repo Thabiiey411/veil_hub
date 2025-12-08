@@ -71,6 +71,34 @@ Volumes & config
 - `./veil-hub-v2/move` in this repo is mounted into the container at `/app/move`.
 - A `supra-cache` Docker volume is used for caching keys/configs. You can map `~/.supra` for persistent keys (read-only in `docker-compose.supra.yml` by default).
 
+Creating and managing Supra profiles (keys)
+
+Supra CLI (v9.x and later) uses a `profile` system. If you upgraded from older CLI versions (v6.x), you must migrate existing key files before using profiles:
+
+```bash
+# Run this once after an upgrade
+./scripts/supra-profile-migrate.sh
+```
+
+Generate a new profile (inside container via helper script):
+
+```bash
+./scripts/supra-profile-new.sh accountA         # generates a new key/profile named accountA (defaults to testnet)
+
+# or import an existing private key into a profile
+./scripts/supra-profile-new.sh accountB "0x012345..." testnet
+```
+
+List created profiles:
+
+```bash
+./scripts/supra-profile-list.sh
+```
+
+Notes:
+- Profile names must be unique. Attempting to create or import a profile with an existing name will error.
+- Private keys should never be committed to source control. Use a host-mounted `~/.supra` or Docker secrets to persist and protect keys.
+
 Security notes
 - Keep private keys off the repository. Use a host-mounted `~/.supra` or Docker secrets for private key files.
 

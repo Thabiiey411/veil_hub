@@ -20,18 +20,18 @@ services:
       - supra-network
 
   # Optional: Add a Supra node for local testing
-  supra-node:
-    image: supraoracles/supra-node:latest
-    container_name: veil-supra-node
-    ports:
-      - "8080:8080"  # RPC endpoint
-      - "9090:9090"  # Metrics
-    environment:
-      - NETWORK=testnet
-    networks:
-      - supra-network
-    restart: unless-stopped
-    # Comment out if you want to use testnet instead of local node
+  # supra-node: (disabled by default)
+  #   image: supraoracles/supra-node:latest
+  #   container_name: veil-supra-node
+  #   ports:
+  #     - "8080:8080"  # RPC endpoint
+  #     - "9090:9090"  # Metrics
+  #   environment:
+  #     - NETWORK=testnet
+  #   networks:
+  #     - supra-network
+  #   restart: unless-stopped
+  # Uncomment and configure the supra-node service if you have a valid image and want a local node.
 
 volumes:
   supra-cache:
