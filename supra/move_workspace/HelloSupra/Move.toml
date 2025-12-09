@@ -1,0 +1,11 @@
+[package]
+name = "HelloSupra"
+version = "1.0.0"
+authors = ["Veil Team"]
+
+[addresses]
+hello_supra = "0x0"
+
+[dependencies]
+
+[dev-dependencies]

@@ -1,40 +1,20 @@
-# Supra CLI Container for contract deployment
-FROM ubuntu:24.04
+# Use official Supra CLI image as base
+FROM supralabs/supra-cli:latest
 
 WORKDIR /app
 
-# Install dependencies
+# Install additional tools if needed
 RUN apt-get update && apt-get install -y \
-    curl \
     git \
+    curl \
     ca-certificates \
-    build-essential \
-    pkg-config \
-    libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Rust (required for Supra CLI)
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
-    && . $HOME/.cargo/env
-
-# Set environment
-ENV PATH="/root/.cargo/bin:${PATH}"
-
-# Install Supra CLI
-RUN curl -fsSL https://github.com/Entropy-Foundation/supra-l1-cli/releases/download/latest/supra-cli-linux-x86_64 \
-    -o /usr/local/bin/supra && chmod +x /usr/local/bin/supra
-
-# Verify installation
-RUN supra --version
-
-# Copy Move project
-COPY veil-hub-v2/move/ /app/move/
+# Copy Move project  
+COPY veil-hub-v2/move/ /app/move/ || true
+COPY supra/move_workspace/ /app/move/ || true
 
 WORKDIR /app/move
 
-# Build Move contracts
-RUN supra build
-
-# Entry point
-ENTRYPOINT ["supra"]
-CMD ["--help"]
+# Default entry point
+ENTRYPOINT ["/bin/bash"]

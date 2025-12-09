@@ -1,0 +1,11 @@
+[package]
+name = "VeilHubCore"
+version = "1.0.0"
+authors = ["Veil Team"]
+
+[addresses]
+veil_hub = "0xf268c1cfa298b4c66ab9097fdc634b490b42204efb8be5b5adab160136846026"
+
+[dependencies]
+
+[dev-dependencies]

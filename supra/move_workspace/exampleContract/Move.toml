@@ -1,0 +1,12 @@
+[package]
+name = "exampleContract"
+version = "1.0.0"
+authors = ["Veil Team"]
+
+[addresses]
+hello_blockchain = "0x1"
+
+[dependencies]
+
+[dev-dependencies]
+
