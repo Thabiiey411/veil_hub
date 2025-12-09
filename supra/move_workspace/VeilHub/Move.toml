@@ -1,10 +1,15 @@
 [package]
-name = "VeilToken"
-version = "1.0.0"
+name = "VeilEcosystem"
+version = "17.0.0"
 authors = ["Veil Team"]
 
 [addresses]
-veil_token = "0x935ac2c9ac71bf55a9d67a31a0a09b069b7fc7f396d7521a59b850dec8f92a7b"
+std = "0x1"
+supra_framework = "0x1"
+veil_hub = "0xf268c1cfa298b4c66ab9097fdc634b490b42204efb8be5b5adab160136846026"
+veil_finance = "0xf268c1cfa298b4c66ab9097fdc634b490b42204efb8be5b5adab160136846026"
+phantom_indices = "0xf268c1cfa298b4c66ab9097fdc634b490b42204efb8be5b5adab160136846026"
+phase2 = "0xf268c1cfa298b4c66ab9097fdc634b490b42204efb8be5b5adab160136846026"
 
 [dependencies]
 
